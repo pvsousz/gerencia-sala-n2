@@ -41,19 +41,19 @@ public class DisciplineModel implements Serializable {
         this.clasrooms = classrooms;
     }
 
-    public String getNameDiscipline() {
+    public String getNameDisc() {
         return nameDiscipline;
     }
 
-    public void setNameDiscipline(String nameDiscipline) {
+    public void setNameDisc(String nameDiscipline) {
         this.nameDiscipline = nameDiscipline;
     }
 
-    public String getCodDiscipline() {
+    public String getCodDisc() {
         return codDiscipline;
     }
 
-    public void setCodDiscipline(String codDiscipline) {
+    public void setCodDisc(String codDiscipline) {
         this.codDiscipline = codDiscipline;
     }
 

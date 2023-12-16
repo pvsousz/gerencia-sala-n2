@@ -67,7 +67,7 @@ public class ClassRoomDAO {
                         DaysWeekEnum.valueOf(resultSet.getString("day")),
                         HoraryEnum.valueOf(resultSet.getString("horary")));
 
-                discipline.setCodDiscipline(resultSet.getString("codDiscipline"));
+                discipline.setCodDisc(resultSet.getString("codDiscipline"));
                 disciplines.add(discipline);
             }
         } catch (SQLException e) {

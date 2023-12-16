@@ -38,9 +38,9 @@ public class DisciplineDAO {
                         TurnEnum.valueOf(resultSet.getString("turn")),
                         DaysWeekEnum.valueOf(resultSet.getString("day")),
                         HoraryEnum.valueOf(resultSet.getString("horary")));
-                discipline.setCodDiscipline(resultSet.getString("codDiscipline"));
+                discipline.setCodDisc(resultSet.getString("codDiscipline"));
 
-                List<ClassRoomModel> classRooms = getClassRoomsForDiscipline(discipline.getCodDiscipline());
+                List<ClassRoomModel> classRooms = getClassRoomsForDiscipline(discipline.getCodDisc());
                 discipline.setClasrooms(classRooms);
 
                 disciplines.add(discipline);
@@ -102,7 +102,7 @@ public class DisciplineDAO {
                             DaysWeekEnum.valueOf(resultSet.getString("day")),
                             HoraryEnum.valueOf(resultSet.getString("horary")));
 
-                    discipline.setCodDiscipline(resultSet.getString("codDiscipline"));
+                    discipline.setCodDisc(resultSet.getString("codDiscipline"));
                 }
             }
         } catch (SQLException e) {
@@ -122,10 +122,10 @@ public class DisciplineDAO {
                 PreparedStatement insertClassRoomDisciplineStatement = connection
                         .prepareStatement(insertClassRoomDisciplineSql)) {
 
-            discipline.setCodDiscipline(generateNextDisciplineId());
-            insertDisciplineStatement.setString(1, discipline.getCodDiscipline());
-            insertDisciplineStatement.setString(2, discipline.getNameDiscipline());
-            insertDisciplineStatement.setString(3, discipline.getCodDiscipline());
+            discipline.setCodDisc(generateNextDisciplineId());
+            insertDisciplineStatement.setString(1, discipline.getCodDisc());
+            insertDisciplineStatement.setString(2, discipline.getNameDisc());
+            insertDisciplineStatement.setString(3, discipline.getCodDisc());
             insertDisciplineStatement.setString(4, discipline.getCourse());
             insertDisciplineStatement.setInt(5, discipline.getWeeklyWorkload());
             insertDisciplineStatement.setString(6, discipline.getTeacher());
@@ -137,13 +137,13 @@ public class DisciplineDAO {
 
             try (ResultSet generatedKeys = insertDisciplineStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    discipline.setCodDiscipline(generatedKeys.getString(1));
+                    discipline.setCodDisc(generatedKeys.getString(1));
                 }
             }
 
             for (ClassRoomModel classRoom : discipline.getClasrooms()) {
                 insertClassRoomDisciplineStatement.setString(1, classRoom.getIdStringTemplate());
-                insertClassRoomDisciplineStatement.setString(2, discipline.getCodDiscipline());
+                insertClassRoomDisciplineStatement.setString(2, discipline.getCodDisc());
                 insertClassRoomDisciplineStatement.executeUpdate();
             }
 
@@ -164,21 +164,21 @@ public class DisciplineDAO {
                 PreparedStatement insertClassRoomDisciplineStatement = connection
                         .prepareStatement(insertClassRoomDisciplineSql)) {
 
-            updateDisciplineStatement.setString(1, discipline.getNameDiscipline());
+            updateDisciplineStatement.setString(1, discipline.getNameDisc());
             updateDisciplineStatement.setString(2, discipline.getCourse());
             updateDisciplineStatement.setInt(3, discipline.getWeeklyWorkload());
             updateDisciplineStatement.setString(4, discipline.getTeacher());
             updateDisciplineStatement.setString(5, discipline.getTurn().toString());
             updateDisciplineStatement.setString(6, discipline.getDay().toString());
             updateDisciplineStatement.setString(7, discipline.getHorary().toString());
-            updateDisciplineStatement.setString(8, discipline.getCodDiscipline());
+            updateDisciplineStatement.setString(8, discipline.getCodDisc());
 
-            deleteClassRoomDisciplineStatement.setString(1, discipline.getCodDiscipline());
+            deleteClassRoomDisciplineStatement.setString(1, discipline.getCodDisc());
             deleteClassRoomDisciplineStatement.executeUpdate();
 
             for (ClassRoomModel classRoom : discipline.getClasrooms()) {
                 insertClassRoomDisciplineStatement.setString(1, classRoom.getIdStringTemplate());
-                insertClassRoomDisciplineStatement.setString(2, discipline.getCodDiscipline());
+                insertClassRoomDisciplineStatement.setString(2, discipline.getCodDisc());
                 insertClassRoomDisciplineStatement.executeUpdate();
             }
 

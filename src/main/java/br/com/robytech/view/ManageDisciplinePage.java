@@ -57,7 +57,7 @@ public class ManageDisciplinePage {
 
                 deleteButton.setOnAction(event -> {
                     DisciplineModel item = getItem();
-                    disciplineDAO.deleteDiscipline(item.getCodDiscipline());
+                    disciplineDAO.deleteDiscipline(item.getCodDisc());
                     updateListView(disciplineListView);
                 });
 
@@ -72,7 +72,7 @@ public class ManageDisciplinePage {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText(item.getCodDiscipline() + " - Nome: " + item.getNameDiscipline() + " - Professor: "
+                    setText(item.getCodDisc() + " - Nome: " + item.getNameDisc() + " - Professor: "
                             + item.getTeacher() + " - Carga: "
                             + item.getWeeklyWorkload() + "Hrs" + " - Horario: " + item.getHorary() + " - Turno: "
                             + item.getTurn()
@@ -88,8 +88,8 @@ public class ManageDisciplinePage {
             ObservableList<DisciplineModel> filteredList = FXCollections.observableArrayList();
 
             for (DisciplineModel discipline : disciplines) {
-                if (discipline.getCodDiscipline().toLowerCase().contains(searchTerm)
-                        || discipline.getNameDiscipline().toLowerCase().contains(searchTerm)) {
+                if (discipline.getCodDisc().toLowerCase().contains(searchTerm)
+                        || discipline.getNameDisc().toLowerCase().contains(searchTerm)) {
                     filteredList.add(discipline);
                 }
             }
@@ -197,7 +197,7 @@ public class ManageDisciplinePage {
 
         TextField nomeDisciplineField = new TextField();
         nomeDisciplineField.setPromptText("Nome da Disciplina");
-        nomeDisciplineField.setText(disciplineToEdit.getNameDiscipline());
+        nomeDisciplineField.setText(disciplineToEdit.getNameDisc());
 
         TextField courseField = new TextField();
         courseField.setPromptText("Curso");
